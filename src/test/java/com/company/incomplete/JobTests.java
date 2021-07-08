@@ -23,7 +23,11 @@ public class JobTests {
     @Test
     public void testJobConstructorSetsAllFields() {
        Job job1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-       Assertions.assertTrue(job1 instanceof Job);
+       Assertions.assertTrue(job1.getName().equals("Product tester"));
+        Assertions.assertTrue(job1.getEmployer().getValue().equals("ACME"));
+        Assertions.assertTrue(job1.getLocation().getValue().equals("Desert"));
+        Assertions.assertTrue(job1.getPositionType().getValue().equals("Quality control"));
+        Assertions.assertTrue(job1.getCoreCompetency().getValue().equals("Persistence"));
     }
 
     @Test
@@ -39,16 +43,43 @@ public class JobTests {
     // you can follow TDD if you want, or you can write the implementation first and then get the tests to pass, either is a fine approach
     @Test
     public void testToStringContainsBlankLines() {
-
+        Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String expectedToStringOutput =
+                        "\n" +
+                        "ID: 1\n"+
+                        "Name: Product tester\n" +
+                        "Employer: ACME\n" +
+                        "Location: Desert\n" +
+                        "Position Type: Quality control\n" +
+                        "Core Competency: Persistence\n";
+        Assertions.assertEquals(expectedToStringOutput, testJob.toString());
     }
 
     @Test
-    public void testToStringHasLabelsForEachField() {
-
+    public void testToStringIsFormattedProperly() {
+        Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        String expectedToStringOutput =
+                        "\n" +
+                        "ID: 1\n"+
+                        "Name: Product tester\n" +
+                        "Employer: ACME\n" +
+                        "Location: Desert\n" +
+                        "Position Type: Quality control\n" +
+                        "Core Competency: Persistence\n";
+        Assertions.assertEquals(expectedToStringOutput, testJob.toString());
     }
 
     @Test
     public void testToStringDataNotAvailable() {
-
+    Job testJob = new Job ("Software Eng. 1", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
+            String expectedToBeStringOutput =
+                            "\n" +
+                            "ID: 1\n"+
+                            "Name: Software Eng. 1\n" +
+                            "Employer: Data Not Available\n" +
+                            "Location: Data Not Available\n" +
+                            "Position Type: Data Not Available\n" +
+                            "Core Competency: Data Not Available\n";
+            Assertions.assertEquals(testJob.toString(), expectedToBeStringOutput);
     }
 }
